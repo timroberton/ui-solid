@@ -1,6 +1,6 @@
 export * from "./button";
-// export * from "./input";
-// export * from "./select";
+export * from "./input";
+export * from "./select";
 // export * from "./checkbox";
 // export * from "./login_page";
 // export * from "./client_rect";
