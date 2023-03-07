@@ -14,10 +14,6 @@ export var getClassesForButton = cva("inline-flex items-center justify-center ro
             small: "text-sm py-1 px-2",
             medium: "text-base py-2 px-4",
         },
-        margin: {
-            left: "ml-2",
-            right: "mr-2",
-        },
     },
     // compoundVariants: [
     //   { intent: "primary", size: "medium", className: "uppercase" },
@@ -28,11 +24,10 @@ export var getClassesForButton = cva("inline-flex items-center justify-center ro
     },
 });
 export function Button(_a) {
-    var extraClasses = _a.class, intent = _a.intent, size = _a.size, margin = _a.margin, props = __rest(_a, ["class", "intent", "size", "margin"]);
+    var extraClasses = _a.class, intent = _a.intent, size = _a.size, props = __rest(_a, ["class", "intent", "size"]);
     return (<button class={getClassesForButton({
             intent: intent,
             size: size,
-            margin: margin,
             class: extraClasses,
         })} {...props}>
       {props.children}

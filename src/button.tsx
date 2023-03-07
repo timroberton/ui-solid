@@ -23,10 +23,6 @@ export const getClassesForButton = cva(
         small: "text-sm py-1 px-2",
         medium: "text-base py-2 px-4",
       },
-      margin: {
-        left: "ml-2",
-        right: "mr-2",
-      },
     },
     // compoundVariants: [
     //   { intent: "primary", size: "medium", className: "uppercase" },
@@ -38,7 +34,7 @@ export const getClassesForButton = cva(
   }
 );
 
-type ButtonProps = JSX.HTMLAttributes<HTMLButtonElement> &
+type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof getClassesForButton> & {
     children: JSX.Element;
   };
@@ -47,7 +43,6 @@ export function Button({
   class: extraClasses,
   intent,
   size,
-  margin,
   ...props
 }: ButtonProps) {
   return (
@@ -55,7 +50,6 @@ export function Button({
       class={getClassesForButton({
         intent,
         size,
-        margin,
         class: extraClasses,
       })}
       {...props}
