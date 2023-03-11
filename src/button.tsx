@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { JSX } from "solid-js";
 
 export const getClassesForButton = cva(
-  "inline-flex items-center justify-center rounded border border-transparent font-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
+  "inline-flex items-center justify-center whitespace-nowrap rounded border border-transparent font-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
   {
     variants: {
       intent: {

@@ -1,6 +1,6 @@
 import { __rest } from "tslib";
 import { cva } from "class-variance-authority";
-export var getClassesForInput = cva("block w-full rounded border-base-300 text-base-content", {
+export var getClassesForInput = cva("block rounded border-base-300 text-base-content px-4 w-full", {
     variants: {
         intent: {
             primary: "focus:border-primary focus:ring-primary",
@@ -21,7 +21,7 @@ export function Input(_a) {
     var extraClasses = _a.class, intent = _a.intent, type = _a.type, props = __rest(_a, ["class", "intent", "type"]);
     return (<input class={getClassesForInput({
             intent: intent,
-            className: extraClasses,
+            class: extraClasses,
         })} type={type !== null && type !== void 0 ? type : "text"} {...props}/>);
 }
 export function InputWithLabel(_a) {

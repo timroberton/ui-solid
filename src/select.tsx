@@ -1,19 +1,16 @@
-"use client";
 
+import { cva, VariantProps } from "class-variance-authority";
 import {
   HeadlessDisclosureChild,
   Listbox,
-  ListboxButton,
-  ListboxLabel,
-  ListboxOption,
+  ListboxButton, ListboxOption,
   ListboxOptions,
-  Transition,
+  Transition
 } from "solid-headless";
-import { cva, VariantProps } from "class-variance-authority";
-import { createSignal, For, JSX } from "solid-js";
+import { For, JSX } from "solid-js";
 
 export const getClassesForSelect = cva(
-  "rounded border border-base-300 w-full cursor-pointer bg-white py-2 relative text-base-content pl-3 pr-10 text-left focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none",
+  "block rounded border border-base-300 focus-visible:ring-1 text-base-content cursor-pointer bg-white text-base py-2 pl-4 pr-10 text-left focus:outline-none w-full",
   {
     variants: {
       intent: {
@@ -33,6 +30,111 @@ export const getClassesForSelect = cva(
     },
   }
 );
+
+type SelectProps<T> = VariantProps<typeof getClassesForSelect> & {
+  selected: T;
+  options: { key: T; text: string }[];
+  onChange: (v: T) => void;
+  label?: string;
+  class?: string;
+  name?: string;
+};
+
+export function Select<T extends string | number>(props: SelectProps<T>) {
+  const selectedFull = () =>
+    props.options.find((a) => a.key === props.selected);
+
+  return (
+    <Listbox
+      defaultOpen={false}
+      value={props.selected}
+      onSelectChange={props.onChange}
+    >
+      <div class={`relative w-full ${props.class}`} >
+        <ListboxButton class={getClassesForSelect({
+          intent: props.intent,
+        })} name={props.name}>
+          <span class="block truncate">{selectedFull()?.text}</span>
+          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+            <SelectorIcon class="text-gray-400 h-5 w-5" aria-hidden="true" />
+          </span>
+        </ListboxButton>
+        <HeadlessDisclosureChild>
+          {({ isOpen }) => (
+            <Transition
+              show={isOpen()}
+              enter="transition ease-in duration-100"
+              enterFrom="opacity-0"
+              enterTo="opacity-100"
+              leave="transition ease-out duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+            >
+              <ListboxOptions class="rounded absolute mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
+                <For each={props.options}>
+                  {(opt) => (
+                    <ListboxOption
+                      class="group focus:outline-none"
+                      value={opt.key}
+                    >
+                      {({ isActive, isSelected }) => (
+                        <div
+                          class={`${isActive() ? "bg-base-200" : "hover:bg-base-200"} relative cursor-pointer select-none py-2 pl-10 pr-4`}
+                        >
+                          <span class="block truncate">
+                            {opt.text}
+                          </span>
+                          {isSelected() ? (
+                            <span
+                              class="absolute inset-y-0 left-0 flex items-center pl-4"
+                            >
+                              <CheckIcon class="h-5 w-5" aria-hidden="true" />
+                            </span>
+                          ) : null}
+                        </div>
+                      )}
+                    </ListboxOption>
+                  )}
+                </For>
+              </ListboxOptions>
+            </Transition>
+          )}
+        </HeadlessDisclosureChild>
+      </div>
+    </Listbox>
+  );
+}
+
+
+
+type SelectWithLabelProps<T> = SelectProps<T> & { rootId: string; label: string };
+
+export function SelectWithLabel<T extends string | number>({
+  label,
+  rootId,
+  ...props
+}: SelectWithLabelProps<T>) {
+  return (
+    <div>
+      <label
+        html-for={rootId}
+        class="mb-1 block text-sm text-base-content-lighter"
+      >
+        {label}
+      </label>
+      <div class="">
+        <Select name={rootId} {...props} />
+      </div>
+    </div>
+  );
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+
+
 
 function CheckIcon(props: JSX.IntrinsicElements["svg"]): JSX.Element {
   return (
@@ -69,97 +171,5 @@ function SelectorIcon(props: JSX.IntrinsicElements["svg"]): JSX.Element {
         d="M8 9l4-4 4 4m0 6l-4 4-4-4"
       />
     </svg>
-  );
-}
-
-function classNames(...classes: (string | boolean | undefined)[]): string {
-  return classes.filter(Boolean).join(" ");
-}
-
-type SelectProps<T> = VariantProps<typeof getClassesForSelect> & {
-  selected: T;
-  options: { key: T; text: string }[];
-  onChange: (v: T) => void;
-  label?: string;
-  class?: string;
-};
-
-export function Select<T extends string | number>(props: SelectProps<T>) {
-  const selectedFull = () =>
-    props.options.find((a) => a.key === props.selected);
-
-  return (
-    <Listbox
-      defaultOpen={false}
-      value={props.selected}
-      onSelectChange={props.onChange}
-    >
-      <div class="relative mt-1">
-        <ListboxButton class="rounded-lg focus-visible:ring-offset-orange-300 focus-visible:border-indigo-500 relative w-full cursor-default bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 sm:text-sm">
-          <span class="block truncate">{selectedFull()?.text}</span>
-          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-            <SelectorIcon class="text-gray-400 h-5 w-5" aria-hidden="true" />
-          </span>
-        </ListboxButton>
-        <HeadlessDisclosureChild>
-          {({ isOpen }) => (
-            <Transition
-              show={isOpen()}
-              enter="transition ease-in duration-100"
-              enterFrom="opacity-0"
-              enterTo="opacity-100"
-              leave="transition ease-out duration-100"
-              leaveFrom="opacity-100"
-              leaveTo="opacity-0"
-            >
-              <ListboxOptions class="rounded-md absolute mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                <For each={props.options}>
-                  {(opt) => (
-                    <ListboxOption
-                      class="group focus:outline-none"
-                      value={opt.key}
-                    >
-                      {({ isActive, isSelected }) => (
-                        <div
-                          class={classNames(
-                            isActive()
-                              ? "text-amber-900 bg-amber-100"
-                              : "text-gray-900",
-                            "group-hover:text-amber-900 group-hover:bg-amber-100",
-                            "relative cursor-default select-none py-2 pl-10 pr-4"
-                          )}
-                        >
-                          <span
-                            class={classNames(
-                              isSelected() ? "font-medium" : "font-normal",
-                              "block truncate"
-                            )}
-                          >
-                            {opt.text}
-                          </span>
-                          {isSelected() ? (
-                            <span
-                              class={classNames(
-                                isActive()
-                                  ? "text-amber-600"
-                                  : "text-amber-600",
-                                "group-hover:text-amber-600",
-                                "absolute inset-y-0 left-0 flex items-center pl-3"
-                              )}
-                            >
-                              <CheckIcon class="h-5 w-5" aria-hidden="true" />
-                            </span>
-                          ) : null}
-                        </div>
-                      )}
-                    </ListboxOption>
-                  )}
-                </For>
-              </ListboxOptions>
-            </Transition>
-          )}
-        </HeadlessDisclosureChild>
-      </div>
-    </Listbox>
   );
 }

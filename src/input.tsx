@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { JSX } from "solid-js";
 
 export const getClassesForInput = cva(
-  "block w-full rounded border-base-300 text-base-content",
+  "block rounded border-base-300 text-base-content px-4 w-full",
   {
     variants: {
       intent: {
@@ -35,7 +35,7 @@ export function Input({
     <input
       class={getClassesForInput({
         intent,
-        className: extraClasses,
+        class: extraClasses,
       })}
       type={type ?? "text"}
       {...props}
