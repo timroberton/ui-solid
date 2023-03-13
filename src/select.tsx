@@ -1,11 +1,11 @@
-
 import { cva, VariantProps } from "class-variance-authority";
 import {
   HeadlessDisclosureChild,
   Listbox,
-  ListboxButton, ListboxOption,
+  ListboxButton,
+  ListboxOption,
   ListboxOptions,
-  Transition
+  Transition,
 } from "solid-headless";
 import { For, JSX } from "solid-js";
 
@@ -50,10 +50,13 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
       value={props.selected}
       onSelectChange={props.onChange}
     >
-      <div class={`relative w-full ${props.class}`} >
-        <ListboxButton class={getClassesForSelect({
-          intent: props.intent,
-        })} name={props.name}>
+      <div class={`relative w-full ${props.class}`}>
+        <ListboxButton
+          class={getClassesForSelect({
+            intent: props.intent,
+          })}
+          name={props.name}
+        >
           <span class="block truncate">{selectedFull()?.text}</span>
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <SelectorIcon class="text-gray-400 h-5 w-5" aria-hidden="true" />
@@ -70,7 +73,7 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <ListboxOptions class="rounded absolute mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
+              <ListboxOptions class="absolute mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
                 <For each={props.options}>
                   {(opt) => (
                     <ListboxOption
@@ -79,15 +82,13 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
                     >
                       {({ isActive, isSelected }) => (
                         <div
-                          class={`${isActive() ? "bg-base-200" : "hover:bg-base-200"} relative cursor-pointer select-none py-2 pl-10 pr-4`}
+                          class={`${
+                            isActive() ? "bg-base-200" : "hover:bg-base-200"
+                          } relative cursor-pointer select-none py-2 pl-10 pr-4`}
                         >
-                          <span class="block truncate">
-                            {opt.text}
-                          </span>
+                          <span class="block truncate">{opt.text}</span>
                           {isSelected() ? (
-                            <span
-                              class="absolute inset-y-0 left-0 flex items-center pl-4"
-                            >
+                            <span class="absolute inset-y-0 left-0 flex items-center pl-4">
                               <CheckIcon class="h-5 w-5" aria-hidden="true" />
                             </span>
                           ) : null}
@@ -105,9 +106,10 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
   );
 }
 
-
-
-type SelectWithLabelProps<T> = SelectProps<T> & { rootId: string; label: string };
+type SelectWithLabelProps<T> = SelectProps<T> & {
+  rootId: string;
+  label: string;
+};
 
 export function SelectWithLabel<T extends string | number>({
   label,
@@ -129,12 +131,9 @@ export function SelectWithLabel<T extends string | number>({
   );
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
-
-
 
 function CheckIcon(props: JSX.IntrinsicElements["svg"]): JSX.Element {
   return (

@@ -1,6 +1,6 @@
 import { __rest } from "tslib";
 import { cva } from "class-variance-authority";
-import { HeadlessDisclosureChild, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition } from "solid-headless";
+import { HeadlessDisclosureChild, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition, } from "solid-headless";
 import { For } from "solid-js";
 export var getClassesForSelect = cva("block rounded border border-base-300 focus-visible:ring-1 text-base-content cursor-pointer bg-white text-base py-2 pl-4 pr-10 text-left focus:outline-none w-full", {
     variants: {
@@ -38,15 +38,13 @@ export function Select(props) {
           {function (_a) {
             var isOpen = _a.isOpen;
             return (<Transition show={isOpen()} enter="transition ease-in duration-100" enterFrom="opacity-0" enterTo="opacity-100" leave="transition ease-out duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-              <ListboxOptions class="rounded absolute mt-1 max-h-60 w-full overflow-auto bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
+              <ListboxOptions class="absolute mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
                 <For each={props.options}>
                   {function (opt) { return (<ListboxOption class="group focus:outline-none" value={opt.key}>
                       {function (_a) {
                         var isActive = _a.isActive, isSelected = _a.isSelected;
                         return (<div class={"".concat(isActive() ? "bg-base-200" : "hover:bg-base-200", " relative cursor-pointer select-none py-2 pl-10 pr-4")}>
-                          <span class="block truncate">
-                            {opt.text}
-                          </span>
+                          <span class="block truncate">{opt.text}</span>
                           {isSelected() ? (<span class="absolute inset-y-0 left-0 flex items-center pl-4">
                               <CheckIcon class="h-5 w-5" aria-hidden="true"/>
                             </span>) : null}
