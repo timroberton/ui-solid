@@ -43,6 +43,7 @@ export function Button({
   class: extraClasses,
   intent,
   size,
+  type,
   ...props
 }: ButtonProps) {
   return (
@@ -52,6 +53,7 @@ export function Button({
         size,
         class: extraClasses,
       })}
+      type={type ?? "button"}
       {...props}
     >
       {props.children}

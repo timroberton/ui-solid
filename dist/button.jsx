@@ -24,12 +24,12 @@ export var getClassesForButton = cva("inline-flex items-center justify-center wh
     },
 });
 export function Button(_a) {
-    var extraClasses = _a.class, intent = _a.intent, size = _a.size, props = __rest(_a, ["class", "intent", "size"]);
+    var extraClasses = _a.class, intent = _a.intent, size = _a.size, type = _a.type, props = __rest(_a, ["class", "intent", "size", "type"]);
     return (<button class={getClassesForButton({
             intent: intent,
             size: size,
             class: extraClasses,
-        })} {...props}>
+        })} type={type !== null && type !== void 0 ? type : "button"} {...props}>
       {props.children}
     </button>);
 }

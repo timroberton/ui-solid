@@ -7,6 +7,6 @@ export declare const getClassesForButton: (props?: {
 type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof getClassesForButton> & {
     children: JSX.Element;
 };
-export declare function Button({ class: extraClasses, intent, size, ...props }: ButtonProps): JSX.Element;
+export declare function Button({ class: extraClasses, intent, size, type, ...props }: ButtonProps): JSX.Element;
 export {};
 //# sourceMappingURL=button.d.ts.map
