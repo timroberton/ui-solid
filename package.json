@@ -12,6 +12,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@supabase/supabase-js": "^2.10.0",
     "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.13",
     "class-variance-authority": "^0.4.0",
