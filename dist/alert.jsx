@@ -1,62 +1,47 @@
 import { __assign, __awaiter, __generator } from "tslib";
-import { createContext, createEffect, createSignal, onCleanup, Show, useContext, } from "solid-js";
+import { createEffect, createSignal, onCleanup, Show } from "solid-js";
 import { Dynamic, Portal } from "solid-js/web";
 import { Button } from "./button";
 import { Input, InputWithLabel } from "./input";
-var defaultContext = {
-    openAlert: function (v) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-        return [2 /*return*/];
-    }); }); },
-    openConfirm: function (v) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-        return [2 /*return*/, false];
-    }); }); },
-    openPrompt: function (v) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-        return [2 /*return*/, undefined];
-    }); }); },
-    openComponent: function (v) { return __awaiter(void 0, void 0, void 0, function () { return __generator(this, function (_a) {
-        return [2 /*return*/, undefined];
-    }); }); },
-};
-export var Context = createContext(defaultContext);
+var _a = createSignal(undefined), alertState = _a[0], setAlertState = _a[1];
+export function openAlert(v) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    setAlertState(__assign(__assign({}, v), { stateType: "alert", alertResolver: resolve }));
+                })];
+        });
+    });
+}
+export function openConfirm(v) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    setAlertState(__assign(__assign({}, v), { stateType: "confirm", confirmResolver: resolve }));
+                })];
+        });
+    });
+}
+export function openPrompt(v) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    setAlertState(__assign(__assign({}, v), { stateType: "prompt", promptResolver: resolve }));
+                })];
+        });
+    });
+}
+export function openComponent(v) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            return [2 /*return*/, new Promise(function (resolve, reject) {
+                    setAlertState(__assign(__assign({}, v), { stateType: "component", componentResolver: resolve }));
+                })];
+        });
+    });
+}
 export default function AlertProvider(props) {
     var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s;
-    var _t = createSignal(undefined), alertState = _t[0], setAlertState = _t[1];
-    function openAlert(v) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (resolve, reject) {
-                        setAlertState(__assign(__assign({}, v), { stateType: "alert", alertResolver: resolve }));
-                    })];
-            });
-        });
-    }
-    function openConfirm(v) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (resolve, reject) {
-                        setAlertState(__assign(__assign({}, v), { stateType: "confirm", confirmResolver: resolve }));
-                    })];
-            });
-        });
-    }
-    function openPrompt(v) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (resolve, reject) {
-                        setAlertState(__assign(__assign({}, v), { stateType: "prompt", promptResolver: resolve }));
-                    })];
-            });
-        });
-    }
-    function openComponent(v) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                return [2 /*return*/, new Promise(function (resolve, reject) {
-                        setAlertState(__assign(__assign({}, v), { stateType: "component", componentResolver: resolve }));
-                    })];
-            });
-        });
-    }
     function cancelAny(evt) {
         var _a, _b, _c, _d;
         if (evt !== "keyboard_escape" &&
@@ -125,7 +110,7 @@ export default function AlertProvider(props) {
             });
         }
     });
-    return (<Context.Provider value={{ openAlert: openAlert, openConfirm: openConfirm, openPrompt: openPrompt, openComponent: openComponent }}>
+    return (<>
       {props.children}
 
       <Show when={alertState()}>
@@ -181,9 +166,8 @@ export default function AlertProvider(props) {
           </div>
         </Portal>
       </Show>
-    </Context.Provider>);
+    </>);
 }
-export var useAlert = function () { return useContext(Context); };
 function InnerForPrompt(props) {
     var _a, _b, _c;
     var _d = createSignal(props.pst.initialInputText), promptInput = _d[0], setPromptInput = _d[1];

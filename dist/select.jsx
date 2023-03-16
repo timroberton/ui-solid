@@ -1,4 +1,3 @@
-import { __rest } from "tslib";
 import { cva } from "class-variance-authority";
 import { HeadlessDisclosureChild, Listbox, ListboxButton, ListboxOption, ListboxOptions, Transition, } from "solid-headless";
 import { For } from "solid-js";
@@ -28,7 +27,7 @@ export function Select(props) {
       <div class={"relative w-full ".concat(props.class)}>
         <ListboxButton class={getClassesForSelect({
             intent: props.intent,
-        })} name={props.name}>
+        })} name={props.name} type="button">
           <span class="block truncate">{(_a = selectedFull()) === null || _a === void 0 ? void 0 : _a.text}</span>
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <SelectorIcon class="text-gray-400 h-5 w-5" aria-hidden="true"/>
@@ -59,14 +58,13 @@ export function Select(props) {
       </div>
     </Listbox>);
 }
-export function SelectWithLabel(_a) {
-    var label = _a.label, rootId = _a.rootId, props = __rest(_a, ["label", "rootId"]);
+export function SelectWithLabel(props) {
     return (<div>
-      <label html-for={rootId} class="mb-1 block text-sm text-base-content-lighter">
-        {label}
+      <label html-for={props.rootId} class="mb-1 block text-sm text-base-content-lighter">
+        {props.label}
       </label>
       <div class="">
-        <Select name={rootId} {...props}/>
+        <Select name={props.rootId} {...props}/>
       </div>
     </div>);
 }

@@ -7,7 +7,7 @@ import {
   ListboxOptions,
   Transition,
 } from "solid-headless";
-import { For, JSX } from "solid-js";
+import { createEffect, For, JSX } from "solid-js";
 
 export const getClassesForSelect = cva(
   "block rounded border border-base-300 focus-visible:ring-1 text-base-content cursor-pointer bg-white text-base py-2 pl-4 pr-10 text-left focus:outline-none w-full",
@@ -56,6 +56,7 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
             intent: props.intent,
           })}
           name={props.name}
+          type="button"
         >
           <span class="block truncate">{selectedFull()?.text}</span>
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -111,21 +112,19 @@ type SelectWithLabelProps<T> = SelectProps<T> & {
   label: string;
 };
 
-export function SelectWithLabel<T extends string | number>({
-  label,
-  rootId,
-  ...props
-}: SelectWithLabelProps<T>) {
+export function SelectWithLabel<T extends string | number>(
+  props: SelectWithLabelProps<T>
+) {
   return (
     <div>
       <label
-        html-for={rootId}
+        html-for={props.rootId}
         class="mb-1 block text-sm text-base-content-lighter"
       >
-        {label}
+        {props.label}
       </label>
       <div class="">
-        <Select name={rootId} {...props} />
+        <Select name={props.rootId} {...props} />
       </div>
     </div>
   );
