@@ -5,11 +5,11 @@ export declare const getClassesForInput: (props?: {
     size?: "small" | "medium";
 } & import("class-variance-authority/dist/types").ClassProp) => string;
 type InputProps = JSX.InputHTMLAttributes<HTMLInputElement> & VariantProps<typeof getClassesForInput>;
-export declare function Input({ class: extraClasses, intent, size, type, ...props }: InputProps): JSX.Element;
+export declare function Input(props: InputProps): JSX.Element;
 type InputWithLabelProps = InputProps & {
     rootId: string;
     label: string;
 };
-export declare function InputWithLabel({ label, rootId, ...props }: InputWithLabelProps): JSX.Element;
+export declare function InputWithLabel(props: InputWithLabelProps): JSX.Element;
 export {};
 //# sourceMappingURL=input.d.ts.map

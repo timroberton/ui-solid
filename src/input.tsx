@@ -30,43 +30,33 @@ export const getClassesForInput = cva(
 type InputProps = JSX.InputHTMLAttributes<HTMLInputElement> &
   VariantProps<typeof getClassesForInput>;
 
-export function Input({
-  class: extraClasses,
-  intent,
-  size,
-  type,
-  ...props
-}: InputProps) {
+export function Input(props: InputProps) {
   return (
     <input
-      class={getClassesForInput({
-        intent,
-        size,
-        class: extraClasses,
-      })}
-      type={type ?? "text"}
       {...props}
+      class={getClassesForInput({
+        intent: props.intent,
+        size: props.size,
+        class: props.class,
+      })}
+      type={props.type ?? "text"}
     />
   );
 }
 
 type InputWithLabelProps = InputProps & { rootId: string; label: string };
 
-export function InputWithLabel({
-  label,
-  rootId,
-  ...props
-}: InputWithLabelProps) {
+export function InputWithLabel(props: InputWithLabelProps) {
   return (
     <div>
       <label
-        html-for={rootId}
+        html-for={props.rootId}
         class="mb-1 block text-sm text-base-content-lighter"
       >
-        {label}
+        {props.label}
       </label>
       <div class="">
-        <Input name={rootId} {...props} />
+        <Input name={props.rootId} {...props} />
       </div>
     </div>
   );

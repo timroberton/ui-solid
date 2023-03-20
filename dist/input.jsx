@@ -1,4 +1,3 @@
-import { __rest } from "tslib";
 import { cva } from "class-variance-authority";
 export var getClassesForInput = cva("block rounded border-base-300 text-base-content w-full", {
     variants: {
@@ -22,22 +21,21 @@ export var getClassesForInput = cva("block rounded border-base-300 text-base-con
         size: "medium",
     },
 });
-export function Input(_a) {
-    var extraClasses = _a.class, intent = _a.intent, size = _a.size, type = _a.type, props = __rest(_a, ["class", "intent", "size", "type"]);
-    return (<input class={getClassesForInput({
-            intent: intent,
-            size: size,
-            class: extraClasses,
-        })} type={type !== null && type !== void 0 ? type : "text"} {...props}/>);
+export function Input(props) {
+    var _a;
+    return (<input {...props} class={getClassesForInput({
+            intent: props.intent,
+            size: props.size,
+            class: props.class,
+        })} type={(_a = props.type) !== null && _a !== void 0 ? _a : "text"}/>);
 }
-export function InputWithLabel(_a) {
-    var label = _a.label, rootId = _a.rootId, props = __rest(_a, ["label", "rootId"]);
+export function InputWithLabel(props) {
     return (<div>
-      <label html-for={rootId} class="mb-1 block text-sm text-base-content-lighter">
-        {label}
+      <label html-for={props.rootId} class="mb-1 block text-sm text-base-content-lighter">
+        {props.label}
       </label>
       <div class="">
-        <Input name={rootId} {...props}/>
+        <Input name={props.rootId} {...props}/>
       </div>
     </div>);
 }

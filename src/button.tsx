@@ -39,22 +39,16 @@ type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> &
     children: JSX.Element;
   };
 
-export function Button({
-  class: extraClasses,
-  intent,
-  size,
-  type,
-  ...props
-}: ButtonProps) {
+export function Button(props: ButtonProps) {
   return (
     <button
-      class={getClassesForButton({
-        intent,
-        size,
-        class: extraClasses,
-      })}
-      type={type ?? "button"}
       {...props}
+      class={getClassesForButton({
+        intent: props.intent,
+        size: props.size,
+        class: props.class,
+      })}
+      type={props.type ?? "button"}
     >
       {props.children}
     </button>

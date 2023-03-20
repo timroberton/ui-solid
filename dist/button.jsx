@@ -1,4 +1,3 @@
-import { __rest } from "tslib";
 import { cva } from "class-variance-authority";
 export var getClassesForButton = cva("inline-flex items-center justify-center whitespace-nowrap rounded border border-transparent font-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2", {
     variants: {
@@ -23,13 +22,13 @@ export var getClassesForButton = cva("inline-flex items-center justify-center wh
         size: "medium",
     },
 });
-export function Button(_a) {
-    var extraClasses = _a.class, intent = _a.intent, size = _a.size, type = _a.type, props = __rest(_a, ["class", "intent", "size", "type"]);
-    return (<button class={getClassesForButton({
-            intent: intent,
-            size: size,
-            class: extraClasses,
-        })} type={type !== null && type !== void 0 ? type : "button"} {...props}>
+export function Button(props) {
+    var _a;
+    return (<button {...props} class={getClassesForButton({
+            intent: props.intent,
+            size: props.size,
+            class: props.class,
+        })} type={(_a = props.type) !== null && _a !== void 0 ? _a : "button"}>
       {props.children}
     </button>);
 }
