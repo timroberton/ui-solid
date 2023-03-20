@@ -7,7 +7,7 @@ import {
   ListboxOptions,
   Transition,
 } from "solid-headless";
-import { createEffect, For, JSX } from "solid-js";
+import { For, JSX } from "solid-js";
 
 export const getClassesForSelect = cva(
   "block rounded border border-base-300 focus-visible:ring-1 text-base-content cursor-pointer bg-white text-base py-2 pl-4 pr-10 text-left focus:outline-none w-full",
