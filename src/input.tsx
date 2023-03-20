@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { JSX } from "solid-js";
 
 export const getClassesForInput = cva(
-  "block rounded border-base-300 text-base-content px-4 w-full",
+  "block rounded border-base-300 text-base-content w-full",
   {
     variants: {
       intent: {
@@ -12,12 +12,17 @@ export const getClassesForInput = cva(
         warning: "focus:border-warning focus:ring-warning",
         error: "focus:border-error focus:ring-error",
       },
+      size: {
+        small: "text-sm py-1 px-2",
+        medium: "text-base py-2 px-4",
+      },
     },
     // compoundVariants: [
     //   { intent: "primary", size: "medium", className: "uppercase" },
     // ],
     defaultVariants: {
       intent: "primary",
+      size: "medium",
     },
   }
 );
@@ -28,6 +33,7 @@ type InputProps = JSX.InputHTMLAttributes<HTMLInputElement> &
 export function Input({
   class: extraClasses,
   intent,
+  size,
   type,
   ...props
 }: InputProps) {
@@ -35,6 +41,7 @@ export function Input({
     <input
       class={getClassesForInput({
         intent,
+        size,
         class: extraClasses,
       })}
       type={type ?? "text"}

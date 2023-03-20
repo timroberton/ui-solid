@@ -2,13 +2,13 @@ import { JSX } from "solid-js";
 type OpenAlertInput = {
     title?: string;
     text: string;
-    intent?: "danger";
+    intent?: "danger" | "success";
     closeButtonLabel?: string;
 };
 type OpenConfirmInput = {
     title?: string;
     text: string | JSX.Element;
-    intent?: "danger";
+    intent?: "danger" | "success";
     confirmButtonLabel?: string;
 };
 type OpenPromptInput = {
@@ -17,7 +17,7 @@ type OpenPromptInput = {
     text?: string;
     inputLabel?: string;
     inputType?: JSX.InputHTMLAttributes<HTMLInputElement>["type"];
-    intent?: "danger";
+    intent?: "danger" | "success";
     saveButtonLabel?: string;
 };
 export type AlertComponentProps<TProps, TReturn> = TProps & {
