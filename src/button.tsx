@@ -1,5 +1,6 @@
 import { cva, VariantProps } from "class-variance-authority";
 import { JSX } from "solid-js";
+import { type TablerIconsProps } from "@tabler/icons-solidjs";
 
 export const getClassesForButton = cva(
   "inline-flex items-center justify-center whitespace-nowrap rounded border border-transparent font-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
@@ -34,8 +35,21 @@ export const getClassesForButton = cva(
   }
 );
 
+export const getClassesForIcon = cva("mr-2", {
+  variants: {
+    size: {
+      small: "h-4 w-4",
+      medium: "h-6 w-6",
+    },
+  },
+  defaultVariants: {
+    size: "medium",
+  },
+});
+
 type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof getClassesForButton> & {
+    icon?: (props: TablerIconsProps) => JSX.Element;
     children: JSX.Element;
   };
 
@@ -50,6 +64,9 @@ export function Button(props: ButtonProps) {
       })}
       type={props.type ?? "button"}
     >
+      {props.icon && (
+        <props.icon class={getClassesForIcon({ size: props.size })} />
+      )}
       {props.children}
     </button>
   );

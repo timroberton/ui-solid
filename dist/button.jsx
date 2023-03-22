@@ -22,6 +22,17 @@ export var getClassesForButton = cva("inline-flex items-center justify-center wh
         size: "medium",
     },
 });
+export var getClassesForIcon = cva("mr-2", {
+    variants: {
+        size: {
+            small: "h-4 w-4",
+            medium: "h-6 w-6",
+        },
+    },
+    defaultVariants: {
+        size: "medium",
+    },
+});
 export function Button(props) {
     var _a;
     return (<button {...props} class={getClassesForButton({
@@ -29,6 +40,7 @@ export function Button(props) {
             size: props.size,
             class: props.class,
         })} type={(_a = props.type) !== null && _a !== void 0 ? _a : "button"}>
+      {props.icon && (<props.icon class={getClassesForIcon({ size: props.size })}/>)}
       {props.children}
     </button>);
 }
