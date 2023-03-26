@@ -10,7 +10,7 @@ export declare const getClassesForIcon: (props?: {
 } & import("class-variance-authority/dist/types").ClassProp) => string;
 type ButtonProps = JSX.ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof getClassesForButton> & {
     icon?: (props: TablerIconsProps) => JSX.Element;
-    children: JSX.Element;
+    children?: JSX.Element;
 };
 export declare function Button(props: ButtonProps): JSX.Element;
 export {};
