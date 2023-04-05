@@ -29,7 +29,7 @@ export function LoginPage(p: LoginPageProps) {
 
   return (
     <main class="flex h-screen w-full items-start justify-center">
-      <div class="text-400 min-h-full w-full space-y-4 rounded bg-base-200 py-10 px-12 text-base-content sm:mt-24 sm:min-h-0 sm:w-96">
+      <div class="text-400 min-h-full w-full space-y-4 rounded bg-base-200 px-12 py-10 text-base-content sm:mt-24 sm:min-h-0 sm:w-96">
         {p.logoLinkElement && (
           <div class="w-full text-center">{p.logoLinkElement}</div>
         )}
@@ -363,7 +363,7 @@ function ResetPasswordForm(p: LoginPageFormPropsRequestPasswordForm) {
   return (
     <form id="resetPasswordForm" class="space-y-4">
       {linkErrorMsg() ? (
-        <div class="text-center text-error">{linkErrorMsg}</div>
+        <div class="text-center text-error">{linkErrorMsg()}</div>
       ) : (
         <>
           <FormHeader>Enter a new password here</FormHeader>
