@@ -11,8 +11,9 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "@supabase/supabase-js": "^2.10.0",
+    "@tabler/icons-solidjs": "^2.11.0",
     "@tailwindcss/forms": "^0.5.3",
     "autoprefixer": "^10.4.13",
     "class-variance-authority": "^0.4.0",
@@ -26,8 +27,5 @@
     "tailwindcss": "^3.2.4",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"
-  },
-  "devDependencies": {
-    "@tabler/icons-solidjs": "^2.11.0"
   }
 }
