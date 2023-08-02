@@ -7,11 +7,13 @@ const _KEY_FOR_SERVER_STATUS = "SERVER_STATUS";
 function getUrlForServerIP(path: string, ip: string): string {
   const _BASE_URL =
     ip.trim() === "a"
-      ? "http://localhost:9001/api"
+      ? "http://0.0.0.0:9001/api"
       : "https://timroberton-aws-proxy.deno.dev/api";
   const _SUFFIX = ip.trim() === "a" ? "" : `?IP=${ip.trim()}`;
   return `${_BASE_URL}${path}${_SUFFIX}`;
 }
+
+type ServerType = "hsmodel" | "readiness";
 
 type AnalysisServerStatus =
   | AnalysisServerStatusNotYetStarted
@@ -51,12 +53,12 @@ const [analysisServerStatus, setAnalysisServerStatus] =
     status: "not_yet_started",
   });
 
-async function initAnalysisServer() {
+async function initAnalysisServer(serverType: ServerType) {
   console.log("RUNNING initialization script");
   const localStorageData = window.localStorage.getItem(_KEY_FOR_SERVER_STATUS);
   if (localStorageData === null) {
     changeServerStatus({ status: "not_yet_started" });
-    launchServer();
+    launchServer(serverType);
     return;
   }
   const lsAss = JSON.parse(localStorageData) as AnalysisServerStatus;
@@ -65,7 +67,7 @@ async function initAnalysisServer() {
     lsAss.status === "not_yet_started" ||
     lsAss.status === "trying_to_start"
   ) {
-    launchServer();
+    launchServer(serverType);
     return;
   }
   if (lsAss.status === "pending") {
@@ -87,12 +89,12 @@ async function initAnalysisServer() {
       });
       return;
     } else {
-      launchServer();
+      launchServer(serverType);
       return;
     }
   }
   if (lsAss.status === "error") {
-    launchServer();
+    launchServer(serverType);
     return;
   }
 }
@@ -115,12 +117,12 @@ async function checkIfServerIsAlive(ip: string): Promise<boolean> {
   }
 }
 
-async function launchServer() {
+async function launchServer(serverType: ServerType) {
   console.log("RUNNING launchServer");
   try {
     changeServerStatus({ status: "trying_to_start" });
     const res = await fetch(
-      `${_HOST_CONTROL_PLANE}/api/run-task?RUN_ACTION=hsmodel&SERVER_ID=xyz`
+      `${_HOST_CONTROL_PLANE}/api/run-task?RUN_ACTION=${serverType}&SERVER_ID=xyz`
     );
     if (res.status !== 200) {
       changeServerStatus({

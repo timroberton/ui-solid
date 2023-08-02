@@ -50,7 +50,7 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
       value={props.selected}
       onSelectChange={props.onChange}
     >
-      <div class={`relative w-full ${props.class}`}>
+      <div class={`relative w-full ${props.class ?? ""}`}>
         <ListboxButton
           class={getClassesForSelect({
             intent: props.intent,
@@ -74,7 +74,7 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <ListboxOptions class="absolute mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
+              <ListboxOptions class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
                 <For each={props.options}>
                   {(opt) => (
                     <ListboxOption
