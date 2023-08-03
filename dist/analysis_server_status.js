@@ -5,7 +5,7 @@ var _HOST_CONTROL_PLANE = "http://localhost:3002";
 var _KEY_FOR_SERVER_STATUS = "SERVER_STATUS";
 function getUrlForServerIP(path, ip) {
     var _BASE_URL = ip.trim() === "a"
-        ? "http://localhost:9001/api"
+        ? "http://0.0.0.0:9001/api"
         : "https://timroberton-aws-proxy.deno.dev/api";
     var _SUFFIX = ip.trim() === "a" ? "" : "?IP=".concat(ip.trim());
     return "".concat(_BASE_URL).concat(path).concat(_SUFFIX);
@@ -13,7 +13,7 @@ function getUrlForServerIP(path, ip) {
 var _a = createSignal({
     status: "not_yet_started",
 }), analysisServerStatus = _a[0], setAnalysisServerStatus = _a[1];
-function initAnalysisServer() {
+function initAnalysisServer(serverType) {
     return __awaiter(this, void 0, void 0, function () {
         var localStorageData, lsAss, isAlive;
         return __generator(this, function (_a) {
@@ -23,14 +23,14 @@ function initAnalysisServer() {
                     localStorageData = window.localStorage.getItem(_KEY_FOR_SERVER_STATUS);
                     if (localStorageData === null) {
                         changeServerStatus({ status: "not_yet_started" });
-                        launchServer();
+                        launchServer(serverType);
                         return [2 /*return*/];
                     }
                     lsAss = JSON.parse(localStorageData);
                     setAnalysisServerStatus(lsAss);
                     if (lsAss.status === "not_yet_started" ||
                         lsAss.status === "trying_to_start") {
-                        launchServer();
+                        launchServer(serverType);
                         return [2 /*return*/];
                     }
                     if (lsAss.status === "pending") {
@@ -55,13 +55,13 @@ function initAnalysisServer() {
                         return [2 /*return*/];
                     }
                     else {
-                        launchServer();
+                        launchServer(serverType);
                         return [2 /*return*/];
                     }
                     _a.label = 2;
                 case 2:
                     if (lsAss.status === "error") {
-                        launchServer();
+                        launchServer(serverType);
                         return [2 /*return*/];
                     }
                     return [2 /*return*/];
@@ -98,7 +98,7 @@ function checkIfServerIsAlive(ip) {
         });
     });
 }
-function launchServer() {
+function launchServer(serverType) {
     return __awaiter(this, void 0, void 0, function () {
         var res, resBody, taskArn, _a;
         return __generator(this, function (_b) {
@@ -109,7 +109,7 @@ function launchServer() {
                 case 1:
                     _b.trys.push([1, 4, , 5]);
                     changeServerStatus({ status: "trying_to_start" });
-                    return [4 /*yield*/, fetch("".concat(_HOST_CONTROL_PLANE, "/api/run-task?RUN_ACTION=hsmodel&SERVER_ID=xyz"))];
+                    return [4 /*yield*/, fetch("".concat(_HOST_CONTROL_PLANE, "/api/run-task?RUN_ACTION=").concat(serverType, "&SERVER_ID=xyz"))];
                 case 2:
                     res = _b.sent();
                     if (res.status !== 200) {

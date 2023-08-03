@@ -16,3 +16,4 @@ export * from "./input";
 export * from "./login_page";
 export * from "./select";
 export * from "./analysis_server_status";
+export * from "./with_label";

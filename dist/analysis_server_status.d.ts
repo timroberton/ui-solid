@@ -1,4 +1,5 @@
 declare function getUrlForServerIP(path: string, ip: string): string;
+type ServerType = "hsmodel" | "readiness";
 type AnalysisServerStatus = AnalysisServerStatusNotYetStarted | AnalysisServerStatusTryingToStart | AnalysisServerStatusPending | AnalysisServerStatusRunning | AnalysisServerStatusCheckingIfAlive | AnalysisServerStatusError;
 type AnalysisServerStatusNotYetStarted = {
     status: "not_yet_started";
@@ -25,6 +26,6 @@ type AnalysisServerStatusError = {
     msg: string;
 };
 declare const analysisServerStatus: import("solid-js").Accessor<AnalysisServerStatus>;
-declare function initAnalysisServer(): Promise<void>;
+declare function initAnalysisServer(serverType: ServerType): Promise<void>;
 export { initAnalysisServer, analysisServerStatus, getUrlForServerIP };
 //# sourceMappingURL=analysis_server_status.d.ts.map

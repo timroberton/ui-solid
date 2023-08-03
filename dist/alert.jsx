@@ -118,51 +118,53 @@ export default function AlertProvider(props) {
           <div role="presentation" class="fixed inset-0 z-10 flex min-h-screen items-center justify-center overflow-y-auto bg-black/30 px-4" onMouseDown={function (evt) {
             downTarget = evt.target;
         }} onClick={cancelAny}>
-            <div role="dialog" class="my-8 max-w-lg rounded bg-white px-10 py-8 shadow-xl" ref={modal} onMouseDown={function (evt) {
-            downTarget = evt.target;
-        }}>
-              {((_a = alertState()) === null || _a === void 0 ? void 0 : _a.stateType) === "component" ? (<Dynamic component={(_b = alertState()) === null || _b === void 0 ? void 0 : _b.element} close={function (p) {
+            {((_a = alertState()) === null || _a === void 0 ? void 0 : _a.stateType) === "component" ? (<div role="dialog" class="rounded bg-white shadow-xl" ref={modal} onMouseDown={function (evt) {
+                downTarget = evt.target;
+            }}>
+                <Dynamic component={(_b = alertState()) === null || _b === void 0 ? void 0 : _b.element} close={function (p) {
                 var _a;
                 (_a = alertState()) === null || _a === void 0 ? void 0 : _a.componentResolver(p);
                 setAlertState(undefined);
-            }} {...(_c = alertState()) === null || _c === void 0 ? void 0 : _c.elementProps}/>) : (<>
-                  {((_d = alertState()) === null || _d === void 0 ? void 0 : _d.title) && (<h2 class={"mb-2 text-lg font-700 ".concat(((_e = alertState()) === null || _e === void 0 ? void 0 : _e.intent) === "danger"
+            }} {...(_c = alertState()) === null || _c === void 0 ? void 0 : _c.elementProps}/>
+              </div>) : (<div role="dialog" class="my-8 max-w-lg rounded bg-white px-10 py-8 shadow-xl" ref={modal} onMouseDown={function (evt) {
+                downTarget = evt.target;
+            }}>
+                {((_d = alertState()) === null || _d === void 0 ? void 0 : _d.title) && (<h2 class={"mb-2 text-lg font-700 ".concat(((_e = alertState()) === null || _e === void 0 ? void 0 : _e.intent) === "danger"
                     ? "text-error"
                     : "")}>
-                      {(_f = alertState()) === null || _f === void 0 ? void 0 : _f.title}
-                    </h2>)}
-                  {((_g = alertState()) === null || _g === void 0 ? void 0 : _g.text) && (<p class="mb-4">{(_h = alertState()) === null || _h === void 0 ? void 0 : _h.text}</p>)}
-                  {((_j = alertState()) === null || _j === void 0 ? void 0 : _j.stateType) === "alert" && (<div class="">
-                      <Button onClick={function () {
+                    {(_f = alertState()) === null || _f === void 0 ? void 0 : _f.title}
+                  </h2>)}
+                {((_g = alertState()) === null || _g === void 0 ? void 0 : _g.text) && (<p class="mb-4">{(_h = alertState()) === null || _h === void 0 ? void 0 : _h.text}</p>)}
+                {((_j = alertState()) === null || _j === void 0 ? void 0 : _j.stateType) === "alert" && (<div class="">
+                    <Button onClick={function () {
                     var _a;
                     (_a = alertState()) === null || _a === void 0 ? void 0 : _a.alertResolver();
                     setAlertState(undefined);
                 }} intent={(_k = alertState()) === null || _k === void 0 ? void 0 : _k.intent}>
-                        {(_m = (_l = alertState()) === null || _l === void 0 ? void 0 : _l.closeButtonLabel) !== null && _m !== void 0 ? _m : "Close"}
-                      </Button>
-                    </div>)}
-                  {((_o = alertState()) === null || _o === void 0 ? void 0 : _o.stateType) === "confirm" && (<div class="space-x-2">
-                      <Button onClick={function () {
+                      {(_m = (_l = alertState()) === null || _l === void 0 ? void 0 : _l.closeButtonLabel) !== null && _m !== void 0 ? _m : "Close"}
+                    </Button>
+                  </div>)}
+                {((_o = alertState()) === null || _o === void 0 ? void 0 : _o.stateType) === "confirm" && (<div class="space-x-2">
+                    <Button onClick={function () {
                     var _a;
                     (_a = alertState()) === null || _a === void 0 ? void 0 : _a.confirmResolver(true);
                     setAlertState(undefined);
                 }} intent={(_p = alertState()) === null || _p === void 0 ? void 0 : _p.intent}>
-                        {(_r = (_q = alertState()) === null || _q === void 0 ? void 0 : _q.confirmButtonLabel) !== null && _r !== void 0 ? _r : "Confirm"}
-                      </Button>
-                      <Button onClick={function () {
+                      {(_r = (_q = alertState()) === null || _q === void 0 ? void 0 : _q.confirmButtonLabel) !== null && _r !== void 0 ? _r : "Confirm"}
+                    </Button>
+                    <Button onClick={function () {
                     var _a;
                     (_a = alertState()) === null || _a === void 0 ? void 0 : _a.confirmResolver(false);
                     setAlertState(undefined);
                 }} intent="neutral" autofocus>
-                        Cancel
-                      </Button>
-                    </div>)}
-                  {((_s = alertState()) === null || _s === void 0 ? void 0 : _s.stateType) === "prompt" && (<InnerForPrompt pst={alertState()} close={function (v) {
+                      Cancel
+                    </Button>
+                  </div>)}
+                {((_s = alertState()) === null || _s === void 0 ? void 0 : _s.stateType) === "prompt" && (<InnerForPrompt pst={alertState()} close={function (v) {
                     alertState().promptResolver(v);
                     setAlertState(undefined);
                 }}/>)}
-                </>)}
-            </div>
+              </div>)}
           </div>
         </Portal>
       </Show>

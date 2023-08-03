@@ -19,16 +19,16 @@ export var getClassesForSelect = cva("block rounded border border-base-300 focus
     },
 });
 export function Select(props) {
-    var _a;
+    var _a, _b;
     var selectedFull = function () {
         return props.options.find(function (a) { return a.key === props.selected; });
     };
     return (<Listbox defaultOpen={false} value={props.selected} onSelectChange={props.onChange}>
-      <div class={"relative w-full ".concat(props.class)}>
+      <div class={"relative w-full ".concat((_a = props.class) !== null && _a !== void 0 ? _a : "")}>
         <ListboxButton class={getClassesForSelect({
             intent: props.intent,
         })} name={props.name} type="button">
-          <span class="block truncate">{(_a = selectedFull()) === null || _a === void 0 ? void 0 : _a.text}</span>
+          <span class="block truncate">{(_b = selectedFull()) === null || _b === void 0 ? void 0 : _b.text}</span>
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <SelectorIcon class="text-gray-400 h-5 w-5" aria-hidden="true"/>
           </span>
@@ -37,7 +37,7 @@ export function Select(props) {
           {function (_a) {
             var isOpen = _a.isOpen;
             return (<Transition show={isOpen()} enter="transition ease-in duration-100" enterFrom="opacity-0" enterTo="opacity-100" leave="transition ease-out duration-100" leaveFrom="opacity-100" leaveTo="opacity-0">
-              <ListboxOptions class="absolute mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
+              <ListboxOptions class="absolute z-50 mt-1 max-h-60 w-full overflow-auto rounded bg-white py-1 text-base text-base-content shadow-lg ring-1 ring-black ring-opacity-5">
                 <For each={props.options}>
                   {function (opt) { return (<ListboxOption class="group focus:outline-none" value={opt.key}>
                       {function (_a) {

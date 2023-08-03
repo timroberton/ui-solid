@@ -215,15 +215,15 @@ export default function AlertProvider(props: { children: JSX.Element }) {
             }}
             onClick={cancelAny}
           >
-            <div
-              role="dialog"
-              class="my-8 max-w-lg rounded bg-white px-10 py-8 shadow-xl"
-              ref={modal}
-              onMouseDown={(evt: MouseEvent) => {
-                downTarget = evt.target;
-              }}
-            >
-              {alertState()?.stateType === "component" ? (
+            {alertState()?.stateType === "component" ? (
+              <div
+                role="dialog"
+                class="rounded bg-white shadow-xl"
+                ref={modal}
+                onMouseDown={(evt: MouseEvent) => {
+                  downTarget = evt.target;
+                }}
+              >
                 <Dynamic
                   component={
                     (alertState() as ComponentStateType<any, any>)?.element
@@ -237,76 +237,83 @@ export default function AlertProvider(props: { children: JSX.Element }) {
                   {...(alertState() as ComponentStateType<any, any>)
                     ?.elementProps}
                 />
-              ) : (
-                <>
-                  {(alertState() as ACPStateType)?.title && (
-                    <h2
-                      class={`mb-2 text-lg font-700 ${
-                        (alertState() as ACPStateType)?.intent === "danger"
-                          ? "text-error"
-                          : ""
-                      }`}
-                    >
-                      {(alertState() as ACPStateType)?.title}
-                    </h2>
-                  )}
-                  {(alertState() as ACPStateType)?.text && (
-                    <p class="mb-4">{(alertState() as ACPStateType)?.text}</p>
-                  )}
-                  {(alertState() as ACPStateType)?.stateType === "alert" && (
-                    <div class="">
-                      <Button
-                        onClick={() => {
-                          (alertState() as AlertStateType)?.alertResolver();
-                          setAlertState(undefined);
-                        }}
-                        intent={(alertState() as AlertStateType)?.intent}
-                      >
-                        {(alertState() as AlertStateType)?.closeButtonLabel ??
-                          "Close"}
-                      </Button>
-                    </div>
-                  )}
-                  {(alertState() as ACPStateType)?.stateType === "confirm" && (
-                    <div class="space-x-2">
-                      <Button
-                        onClick={() => {
-                          (alertState() as ConfirmStateType)?.confirmResolver(
-                            true
-                          );
-                          setAlertState(undefined);
-                        }}
-                        intent={(alertState() as ConfirmStateType)?.intent}
-                      >
-                        {(alertState() as ConfirmStateType)
-                          ?.confirmButtonLabel ?? "Confirm"}
-                      </Button>
-                      <Button
-                        onClick={() => {
-                          (alertState() as ConfirmStateType)?.confirmResolver(
-                            false
-                          );
-                          setAlertState(undefined);
-                        }}
-                        intent="neutral"
-                        autofocus
-                      >
-                        Cancel
-                      </Button>
-                    </div>
-                  )}
-                  {(alertState() as ACPStateType)?.stateType === "prompt" && (
-                    <InnerForPrompt
-                      pst={alertState() as PromptStateType}
-                      close={(v: string | undefined) => {
-                        (alertState() as PromptStateType).promptResolver(v);
+              </div>
+            ) : (
+              <div
+                role="dialog"
+                class="my-8 max-w-lg rounded bg-white px-10 py-8 shadow-xl"
+                ref={modal}
+                onMouseDown={(evt: MouseEvent) => {
+                  downTarget = evt.target;
+                }}
+              >
+                {(alertState() as ACPStateType)?.title && (
+                  <h2
+                    class={`mb-2 text-lg font-700 ${
+                      (alertState() as ACPStateType)?.intent === "danger"
+                        ? "text-error"
+                        : ""
+                    }`}
+                  >
+                    {(alertState() as ACPStateType)?.title}
+                  </h2>
+                )}
+                {(alertState() as ACPStateType)?.text && (
+                  <p class="mb-4">{(alertState() as ACPStateType)?.text}</p>
+                )}
+                {(alertState() as ACPStateType)?.stateType === "alert" && (
+                  <div class="">
+                    <Button
+                      onClick={() => {
+                        (alertState() as AlertStateType)?.alertResolver();
                         setAlertState(undefined);
                       }}
-                    />
-                  )}
-                </>
-              )}
-            </div>
+                      intent={(alertState() as AlertStateType)?.intent}
+                    >
+                      {(alertState() as AlertStateType)?.closeButtonLabel ??
+                        "Close"}
+                    </Button>
+                  </div>
+                )}
+                {(alertState() as ACPStateType)?.stateType === "confirm" && (
+                  <div class="space-x-2">
+                    <Button
+                      onClick={() => {
+                        (alertState() as ConfirmStateType)?.confirmResolver(
+                          true
+                        );
+                        setAlertState(undefined);
+                      }}
+                      intent={(alertState() as ConfirmStateType)?.intent}
+                    >
+                      {(alertState() as ConfirmStateType)?.confirmButtonLabel ??
+                        "Confirm"}
+                    </Button>
+                    <Button
+                      onClick={() => {
+                        (alertState() as ConfirmStateType)?.confirmResolver(
+                          false
+                        );
+                        setAlertState(undefined);
+                      }}
+                      intent="neutral"
+                      autofocus
+                    >
+                      Cancel
+                    </Button>
+                  </div>
+                )}
+                {(alertState() as ACPStateType)?.stateType === "prompt" && (
+                  <InnerForPrompt
+                    pst={alertState() as PromptStateType}
+                    close={(v: string | undefined) => {
+                      (alertState() as PromptStateType).promptResolver(v);
+                      setAlertState(undefined);
+                    }}
+                  />
+                )}
+              </div>
+            )}
           </div>
         </Portal>
       </Show>
