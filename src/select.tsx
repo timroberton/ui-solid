@@ -38,6 +38,7 @@ type SelectProps<T> = VariantProps<typeof getClassesForSelect> & {
   label?: string;
   class?: string;
   name?: string;
+  unselectedError?: boolean;
 };
 
 export function Select<T extends string | number>(props: SelectProps<T>) {
@@ -58,7 +59,13 @@ export function Select<T extends string | number>(props: SelectProps<T>) {
           name={props.name}
           type="button"
         >
-          <span class="block truncate">{selectedFull()?.text}</span>
+          <span
+            class={`block truncate ${
+              props.unselectedError ? "text-error" : ""
+            }`}
+          >
+            {selectedFull()?.text}
+          </span>
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <SelectorIcon class="text-gray-400 h-5 w-5" aria-hidden="true" />
           </span>

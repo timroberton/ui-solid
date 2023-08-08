@@ -13,6 +13,7 @@ type SelectProps<T> = VariantProps<typeof getClassesForSelect> & {
     label?: string;
     class?: string;
     name?: string;
+    unselectedError?: boolean;
 };
 export declare function Select<T extends string | number>(props: SelectProps<T>): JSX.Element;
 type SelectWithLabelProps<T> = SelectProps<T> & {

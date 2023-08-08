@@ -28,7 +28,9 @@ export function Select(props) {
         <ListboxButton class={getClassesForSelect({
             intent: props.intent,
         })} name={props.name} type="button">
-          <span class="block truncate">{(_b = selectedFull()) === null || _b === void 0 ? void 0 : _b.text}</span>
+          <span class={"block truncate ".concat(props.unselectedError ? "text-error" : "")}>
+            {(_b = selectedFull()) === null || _b === void 0 ? void 0 : _b.text}
+          </span>
           <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
             <SelectorIcon class="text-gray-400 h-5 w-5" aria-hidden="true"/>
           </span>
