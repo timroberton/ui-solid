@@ -1,5 +1,5 @@
 import { cva } from "class-variance-authority";
-export var getClassesForInput = cva("block rounded border-base-300 text-base-content w-full", {
+export var getClassesForInput = cva("block rounded border border-base-300 text-base-content w-full", {
     variants: {
         intent: {
             primary: "focus:border-primary focus:ring-primary",

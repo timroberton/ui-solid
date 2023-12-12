@@ -2,7 +2,7 @@ import { cva, VariantProps } from "class-variance-authority";
 import { JSX } from "solid-js";
 
 export const getClassesForInput = cva(
-  "block rounded border-base-300 text-base-content w-full",
+  "block rounded border border-base-300 text-base-content w-full",
   {
     variants: {
       intent: {
