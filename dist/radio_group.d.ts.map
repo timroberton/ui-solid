@@ -1,0 +1,1 @@
+{"version":3,"file":"radio_group.d.ts","sourceRoot":"","sources":["../src/radio_group.tsx"],"names":[],"mappings":"AAIA,wBAAgB,UAAU,CAAC,CAAC,EAAE;IAC5B,KAAK,EAAE,MAAM,CAAC;IACd,QAAQ,EAAE,MAAM,CAAC;IACjB,KAAK,EAAE;QACL,KAAK,EAAE,MAAM,CAAC;QACd,KAAK,EAAE,MAAM,CAAC;KACf,EAAE,CAAC;IACJ,QAAQ,EAAE,CAAC,KAAK,EAAE,MAAM,KAAK,IAAI,CAAC;CACnC,kCAoCA"}

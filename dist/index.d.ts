@@ -4,4 +4,7 @@ export * from "./button";
 export * from "./input";
 export * from "./select";
 export * from "./with_label";
+export * from "./checkbox";
+export * from "./radio_group";
+export * from "./combobox";
 //# sourceMappingURL=index.d.ts.map

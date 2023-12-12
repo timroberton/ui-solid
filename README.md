@@ -61,6 +61,7 @@ module.exports = {
       "error-content": colors.white,
     },
     borderRadius: {
+      full: "9999px",
       DEFAULT: "3px",
     },
     fontFamily: {

@@ -1,9 +1,9 @@
 const colors = require("tailwindcss/colors");
 
 const c1 = colors.blue;
-const c2 = colors.pink;
-const c3 = colors.fuchsia;
-const n1 = colors.slate;
+// const c2 = colors.pink;
+// const c3 = colors.fuchsia;
+// const n1 = colors.slate;
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -49,6 +49,7 @@ module.exports = {
       "error-content": colors.white,
     },
     borderRadius: {
+      full: "9999px",
       DEFAULT: "4px",
     },
     fontFamily: {
